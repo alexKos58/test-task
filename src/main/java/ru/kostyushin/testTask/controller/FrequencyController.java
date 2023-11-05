@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kostyushin.testTask.dto.CharacterCount;
 import ru.kostyushin.testTask.service.FrequencyService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@Tag(description = "Контроллер для тестового задания", name = "TestController")
+@Tag(description = "Контроллер для тестового задания", name = "FrequencyController")
 @RequestMapping("/api/test-task")
 @AllArgsConstructor
-public class CharacterCountController {
+public class FrequencyController {
 
     private final FrequencyService frequencyService;
 
     @PostMapping("/calculate")
     @Operation(summary = "Вычислить частоту встречи символов по заданной строке")
     @ResponseStatus(HttpStatus.OK)
-    public List<CharacterCount> calculateCharacterFrequency(
-            @Parameter(description = "Входная строка") @RequestParam(defaultValue = "aaaaabcccc") String inputString) {
+    public List<Map.Entry<Character, Integer>> calculateCharacterFrequency(
+            @Parameter(description = "Входная строка") @RequestParam String inputString) {
         return frequencyService.calculateFrequency(inputString);
     }
 }
