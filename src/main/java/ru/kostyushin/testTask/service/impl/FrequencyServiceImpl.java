@@ -15,9 +15,9 @@ public class FrequencyServiceImpl implements FrequencyService {
 
         Map<Character, Integer> frequencyMap = new LinkedHashMap<>();
 
-        for (char character : inputString.toCharArray()) {
-            frequencyMap.put(character, frequencyMap.getOrDefault(character, 0) + 1);
-        }
+        inputString.chars()
+                .mapToObj(c -> (char) c)
+                .forEach(character -> frequencyMap.merge(character, 1, Integer::sum));
 
         return frequencyMap.entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
