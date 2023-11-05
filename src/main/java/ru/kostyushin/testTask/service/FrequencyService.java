@@ -1,8 +1,7 @@
 package ru.kostyushin.testTask.service;
 
-import ru.kostyushin.testTask.dto.CharacterCount;
-
 import java.util.List;
+import java.util.Map;
 
 public interface FrequencyService {
 
@@ -12,5 +11,5 @@ public interface FrequencyService {
      * @param inputString - входная строка
      * @return выходной результат(кол-во вхождений каждого символа)
      */
-    List<CharacterCount> calculateFrequency(String inputString);
+    List<Map.Entry<Character, Integer>> calculateFrequency(String inputString);
 }
