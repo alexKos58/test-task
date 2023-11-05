@@ -11,17 +11,12 @@ import java.util.stream.Collectors;
 @Service
 public class FrequencyServiceImpl implements FrequencyService {
 
-    /**
-     * Метод для подсчета количества вхождений символов в заданной строке
-     * @param inputString - входная строка
-     * @return выходной результат(кол-во вхождений каждого символа)
-     */
     public List<CharacterCount> calculateFrequency(String inputString) {
 
         Map<Character, Integer> frequencyMap = new HashMap<>();
 
         for (char character : inputString.toCharArray()) {
-                frequencyMap.put(character, frequencyMap.getOrDefault(character, 0) + 1);
+            frequencyMap.put(character, frequencyMap.getOrDefault(character, 0) + 1);
         }
 
         return frequencyMap.entrySet().stream()
