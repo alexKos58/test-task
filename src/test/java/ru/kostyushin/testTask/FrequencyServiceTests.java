@@ -22,22 +22,25 @@ class FrequencyServiceTests {
 
     @Test
     public void testCalculateFrequency() {
-        String inputString = "1223334444";
+        String inputString = "1223334444fffff";
         List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
 
-        assertEquals(4, result.size());
+        assertEquals(5, result.size());
 
-        assertEquals('4', result.get(0).getKey().charValue());
-        assertEquals(4, result.get(0).getValue());
+        assertEquals('f', result.get(0).getKey().charValue());
+        assertEquals(5, result.get(0).getValue());
 
-        assertEquals('3', result.get(1).getKey().charValue());
-        assertEquals(3, result.get(1).getValue());
+        assertEquals('4', result.get(1).getKey().charValue());
+        assertEquals(4, result.get(1).getValue());
 
-        assertEquals('2', result.get(2).getKey().charValue());
-        assertEquals(2, result.get(2).getValue());
+        assertEquals('3', result.get(2).getKey().charValue());
+        assertEquals(3, result.get(2).getValue());
 
-        assertEquals('1', result.get(3).getKey().charValue());
-        assertEquals(1, result.get(3).getValue());
+        assertEquals('2', result.get(3).getKey().charValue());
+        assertEquals(2, result.get(3).getValue());
+
+        assertEquals('1', result.get(4).getKey().charValue());
+        assertEquals(1, result.get(4).getValue());
     }
 
     @Test
