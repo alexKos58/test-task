@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.kostyushin.testTask.service.FrequencyService;
 import ru.kostyushin.testTask.service.impl.FrequencyServiceImpl;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,30 +21,28 @@ class FrequencyServiceTests {
     @Test
     public void testCalculateFrequency() {
         String inputString = "1223334444fffff";
-        List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
+        Map<Character, Integer> result = frequencyService.calculateFrequency(inputString);
 
         assertEquals(5, result.size());
 
-        assertEquals('f', result.get(0).getKey().charValue());
-        assertEquals(5, result.get(0).getValue());
-
-        assertEquals('4', result.get(1).getKey().charValue());
-        assertEquals(4, result.get(1).getValue());
-
-        assertEquals('3', result.get(2).getKey().charValue());
-        assertEquals(3, result.get(2).getValue());
-
-        assertEquals('2', result.get(3).getKey().charValue());
-        assertEquals(2, result.get(3).getValue());
-
-        assertEquals('1', result.get(4).getKey().charValue());
-        assertEquals(1, result.get(4).getValue());
+        assertEquals(5, result.get('f'));
+        assertEquals(4, result.get('4'));
+        assertEquals(3, result.get('3'));
+        assertEquals(2, result.get('2'));
+        assertEquals(1, result.get('1'));
     }
 
     @Test
     public void testCalculateFrequencyWithEmptyString() {
         String inputString = "";
-        List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
+        Map<Character, Integer> result = frequencyService.calculateFrequency(inputString);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testCalculateFrequencyWithNullString() {
+        Map<Character, Integer> result = frequencyService.calculateFrequency(null);
 
         assertTrue(result.isEmpty());
     }
@@ -54,28 +50,29 @@ class FrequencyServiceTests {
     @Test
     public void testCalculateFrequencyWithLongString() {
         String inputString = "A".repeat(10000);
-        List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
+        Map<Character, Integer> result = frequencyService.calculateFrequency(inputString);
 
         assertEquals(1, result.size());
+        assertEquals(10000, result.get('A'));
     }
 
     @Test
     public void testCalculateFrequencyWithSingleCharacter() {
         String inputString = "A";
-        List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
+        Map<Character, Integer> result = frequencyService.calculateFrequency(inputString);
 
         assertEquals(1, result.size());
-        assertEquals('A', result.get(0).getKey().charValue());
-        assertEquals(1, result.get(0).getValue());
+        assertEquals(1, result.get('A'));
     }
 
     @Test
     public void testCalculateFrequencyWithVeryLongString() {
-        String inputString = String.join("", Collections.nCopies(1000000, "ABC"));
-        List<Map.Entry<Character, Integer>> result = frequencyService.calculateFrequency(inputString);
+        String inputString = "ABC".repeat(1000000);
+        Map<Character, Integer> result = frequencyService.calculateFrequency(inputString);
 
         assertEquals(3, result.size());
-        assertEquals('A', result.get(0).getKey().charValue());
-        assertEquals(1000000, result.get(0).getValue());
+        assertEquals(1000000, result.get('A'));
+        assertEquals(1000000, result.get('B'));
+        assertEquals(1000000, result.get('C'));
     }
 }
