@@ -11,10 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.kostyushin.testTask.service.FrequencyService;
 
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
@@ -35,12 +32,11 @@ public class FrequencyControllerTests {
     public void testCalculateCharacterFrequency() throws Exception {
         String inputString = "1223334444";
 
-        List<Map.Entry<Character, Integer>> expectedResult = Arrays.asList(
-                new AbstractMap.SimpleEntry<>('4', 4),
-                new AbstractMap.SimpleEntry<>('3', 3),
-                new AbstractMap.SimpleEntry<>('2', 2),
-                new AbstractMap.SimpleEntry<>('1', 1)
-        );
+        Map<Character, Integer> expectedResult = new LinkedHashMap<>();
+        expectedResult.put('4', 4);
+        expectedResult.put('3', 3);
+        expectedResult.put('2', 2);
+        expectedResult.put('1', 1);
 
         when(frequencyService.calculateFrequency(inputString)).thenReturn(expectedResult);
 
@@ -57,7 +53,7 @@ public class FrequencyControllerTests {
     public void testCalculateCharacterFrequencyWithEmptyString() throws Exception {
         String inputString = "";
 
-        List<Map.Entry<Character, Integer>> expectedResult = Collections.emptyList();
+        Map<Character, Integer> expectedResult = new LinkedHashMap<>();
 
         when(frequencyService.calculateFrequency(inputString)).thenReturn(expectedResult);
 

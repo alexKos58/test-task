@@ -12,5 +12,5 @@ public interface FrequencyService {
      * @param inputString - входная строка, заданная пользователем
      * @return выходной результат(кол-во вхождений каждого символа)
      */
-    List<Map.Entry<Character, Integer>> calculateFrequency(String inputString);
+    Map<Character, Integer> calculateFrequency(String inputString);
 }
